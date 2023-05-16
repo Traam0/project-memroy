@@ -62,31 +62,52 @@ export default function Guide() {
 									/>
 								</Disclosure.Button>
 								<Disclosure.Panel className="px-6 pt-3 pb-3 text-light text-lg md:w-10/12 font-mono break-words">
-									From the depths of my heart, I have created Project Memory.
+									Project Memory is a heartfelt endeavor born out of a desire to
+									commemorate and preserve the precious moments that define our
+									lives.
 									<br />
-									It's an online application that holds a special place in my
-									heart, designed to express my deepest feelings for You. This
-									person has had an immeasurable impact on my life, and through
-									this project, I want to immortalize our shared experiences and
-									memories. <br /> <br /> The app allows me to capture and share
-									those precious moments that we've shared together. Memories,
-									represented as fragments, are created using dates, images, and
-									text content that describe our time together. The central
-									feature of the app is a scrollable feed, or "An Engram," which
-									visually guides the user through our journey together,
-									highlighting the love, joy, and connection that we've shared.{" "}
-									<br /> <br /> One of the unique aspects of the app is the
-									concept of memory decay. Over time, memories may begin to
-									glitch and decay, representing the natural process of memories
-									fading with the passage of time. This feature serves as a
-									poignant reminder that while memories may fade, the emotions
-									and experiences that we've shared will always remain a vital
-									part of our lives. <br /> <br /> My ultimate goal with this
-									project is to show YOU just how much they mean to me, and how
-									deeply they've impacted my life. The memories contained within
-									this app are a testament to the love, connection, and joy that
-									we've shared together, and I hope that they will always serve
-									as a reminder of our special bond.
+									Inspired by someone special who often grapples with
+									forgetfulness, this project serves as a dedicated platform
+									where a tapestry of memories can be woven.
+									<br />
+									It is an intimate space where I can gather and showcase all
+									the wonderful experiences and significant events, both shared
+									with and without that person. Through a scrollable feed of
+									memories, affectionately known as "An Engram," each fragment
+									comes alive with dates, vivid images, and evocative text,
+									painting a vivid picture of the joy, love, and connections
+									that have shaped our journey.
+									<br />
+									But Project Memory is more than just a collection of memories.
+									It is a testament to the enduring power of shared experiences.
+									It invites others, too, to participate in this beautiful
+									endeavor, opening its doors to the wider public. It offers a
+									sanctuary where individuals can document and preserve their
+									own fading memories, creating a collective tapestry of the
+									past that might otherwise be lost to time.
+									<br />
+									Within the project, memories find solace in an ethereal
+									existence, transcending the bounds of time. While memories may
+									naturally decay, their spirit endures, preserved within the
+									virtual pages of Project Memory. By capturing and sharing
+									these moments, we celebrate the beauty of what once was and
+									create a lasting tribute to the people, places, and events
+									that have shaped us. <br />
+									As we navigate the pages of Project Memory, we embark on a
+									journey of remembrance, guided by the thread of our shared
+									experiences. The scrolling feed of memories, carefully curated
+									and arranged, offers a visual feast for the senses. It serves
+									as a portal to the past, invoking nostalgia and inviting us to
+									relive the joy, laughter, and profound emotions that reside
+									within each memory fragment.
+									<br />
+									In this digital sanctuary, memories are cherished and given
+									the attention they deserve. They are safeguarded from the
+									passage of time, forever etched in the digital tapestry of
+									Project Memory. And as we traverse the moments captured within
+									its virtual walls, we are reminded of the timeless power of
+									human connection and the significance of cherishing the
+									memories that shape us.
 								</Disclosure.Panel>
 							</>
 						)}
