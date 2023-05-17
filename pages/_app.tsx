@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={querryClient.current}>
 			<Hydrate state={pageProps.dehydratedState}>
-				<NextNProgress height={5} color="#5A189A" stopDelayMs={220} />
+				<NextNProgress height={5} color="#E0AAFF" stopDelayMs={220} />
 				<Component {...pageProps} />
 			</Hydrate>
 		</QueryClientProvider>

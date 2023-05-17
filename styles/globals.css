@@ -12,6 +12,10 @@ body {
 	overflow: hidden;
 }
 
+button {
+	--tw-ring-shadow: 0 0 #000 !
+}
+
 .glitch-text {
 	font-weight: 700;
 	text-transform: uppercase;
@@ -107,7 +111,7 @@ body {
 }
 
 .sakura {
-	background-color: #ffc7c7;
+	background-color: #f3b7b7;
 	width: 10px;
 	height: 10px;
 	animation: sakura 8s linear infinite;
@@ -120,33 +124,32 @@ body {
 	animation: leaf 5s linear infinite;
 }
 
-/* 櫻花花瓣和落葉的動畫 */
 @keyframes sakura {
 	0% {
 		transform: translate(0, -10px);
-		opacity: 0;
+		opacity: 0.5;
 	}
 	50% {
-		transform: translate(100px, 200px);
+		transform: translate(150px, 200px);
 		opacity: 1;
 	}
 	100% {
-		transform: translate(200px, 400px);
+		transform: translate(155px, 400px);
 		opacity: 0;
 	}
 }
 
 @keyframes leaf {
 	0% {
-		transform: translate(0, -10px) rotate(0deg);
-		opacity: 0;
+		transform: translate(0px, -50px) rotate(0deg);
+		opacity: 0.5;
 	}
 	50% {
-		transform: translate(100px, 200px) rotate(90deg);
+		transform: translate(100px, 200px) rotate(120deg);
 		opacity: 1;
 	}
 	100% {
-		transform: translate(200px, 400px) rotate(180deg);
+		transform: translate(150px, 400px) rotate(220deg);
 		opacity: 0;
 	}
 }

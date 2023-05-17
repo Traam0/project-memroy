@@ -1,7 +1,7 @@
 /** @format */
 
-import { signToken, validateToken } from "./jswt";
+import { signToken } from "./jswt";
 import { connDB } from "./conDB";
 import { attachCookies } from "./cookies";
 
-export { connDB, signToken, validateToken, attachCookies };
+export { connDB, signToken, attachCookies };

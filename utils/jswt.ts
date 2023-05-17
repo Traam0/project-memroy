@@ -1,14 +1,10 @@
 /** @format */
 
-import jswt from 'jsonwebtoken';
+import jswt from "jsonwebtoken";
 // const jswt = require('jsonwebtoken')
 
-export function signToken(payload: object): string {
+export function signToken(payload: object, expiresIn: string): string {
 	return jswt.sign(payload, process.env.JSWT_SECRET as string, {
-		expiresIn: "30d",
+		expiresIn,
 	});
-}
-
-export function validateToken(payload: string) {
-	return jswt.verify(payload, process.env.JSWT_SECRET as string);
 }

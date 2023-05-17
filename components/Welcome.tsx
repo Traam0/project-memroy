@@ -4,36 +4,11 @@ import { useToggle } from "~/hooks";
 import { GlitchText } from "~/components/ui";
 import { classNames } from "~/utils/classNames";
 import { useRef, useLayoutEffect } from "react";
-
+import { SakuraBloom } from "./sakuraBloom";
 
 export function Welcome(): JSX.Element {
 	const [navIsVisible, toggleNavIsVisible] = useToggle(false);
 	const [count, setCount] = useState<number>(0);
-	const leafContainer = useRef<HTMLDivElement>(null);
-	useLayoutEffect(() => {
-		for (let i = 0; i < 20; i++) {
-			const leaf = document.createElement("div");
-			leaf.classList.add("leaf");
-			leaf.style.left = Math.random() * 100 + "%";
-			leaf.style.top = Math.random() * 100 + "%";
-			leaf.style.animationDelay = Math.random() * 8 + "s";
-			leafContainer.current?.appendChild(leaf);
-		}
-
-		for (let i = 0; i < 30; i++) {
-			const petal = document.createElement("div");
-			petal.classList.add("sakura");
-			petal.style.left = Math.random() * 100 + "%";
-			petal.style.top = Math.random() * 100 + "%";
-			petal.style.animationDelay = Math.random() * 8 + "s";
-			leafContainer.current?.appendChild(petal);
-		}
-
-		return () => {
-			leafContainer.current ? (leafContainer.current.innerHTML = "") : null;
-		};
-	}, []);
-
 	useEffect(() => {
 		if (count === 8) {
 			toggleNavIsVisible();
@@ -53,10 +28,7 @@ export function Welcome(): JSX.Element {
 
 	return (
 		<header className="relative w-full h-full flex flex-col justify-center items-center gap-8 py-6 z-0">
-			<div
-				className="leaf-wrapper absolute inset-0  overflow-clip -z-[1]"
-				ref={leafContainer}
-			></div>
+			<SakuraBloom leafsCount={20} petalsCount={30}/>
 			<h1 className="text-xl md:text-5xl flex gap-3 items-baseline justify-center cursor-pointer select-none ">
 				<span className="font-semibold tracking-wider">Project</span>
 				<GlitchText
