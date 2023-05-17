@@ -11,7 +11,7 @@ import { StatusCodes } from "http-status-codes";
 
 export async function loginAttempt(req: NextApiRequest, res: NextApiResponse) {
 	const salt = await bcryptjs.genSalt(10);
-	const user: User | null = await User.findOne({ email: req.body.email });
+	const user = await User.findOne({ email: req.body.email });
 
 	if (!user) throw NotFoundError(res, "User does not exist");
 
