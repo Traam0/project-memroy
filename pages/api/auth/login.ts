@@ -10,7 +10,7 @@ router.use(connDB).post(loginAttempt);
 
 export default router.handler({
 	onError: (err: any, req: NextApiRequest, res: NextApiResponse) => {
-		console.error(err.stack);
+		console.error(err?.stack);
 		res.status(500).end("Something broke!");
 	},
 	onNoMatch: (req: NextApiRequest, res: NextApiResponse) => {

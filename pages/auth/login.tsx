@@ -61,7 +61,12 @@ export default function Login(): JSX.Element {
 									});
 									setGlobalError("Email Address or password incorrect!");
 									return;
-
+								case 404:
+									toast.error(error.response.data.message, {
+										position: "top-right",
+									});
+									setGlobalError("Email Address or password incorrect!");
+									return;
 								default:
 									toast.error(error.response.data.message);
 									setGlobalError("Oops, Somthing Went Wrong! :'(");
