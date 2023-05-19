@@ -19,7 +19,7 @@ export function attachCookies({
 			httpOnly: true,
 			sameSite: true,
 			secure: false,
-			expires: new Date(Date.now() + 60 * 60 * 1000),
+			expires: new Date(new Date().setDate(new Date().getDate() + 7)),
 		});
 	} else {
 		setCookie("ATS", token, {
@@ -29,7 +29,7 @@ export function attachCookies({
 			sameSite: true,
 			secure: false,
 			// domain: ".vercel.app",
-			expires: new Date(Date.now() + 60 * 60 * 1000),
+			expires: new Date(new Date().setDate(new Date().getDate() + 7)),
 		});
 	}
 }

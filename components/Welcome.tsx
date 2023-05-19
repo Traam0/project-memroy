@@ -5,10 +5,13 @@ import { GlitchText } from "~/components/ui";
 import { classNames } from "~/utils/classNames";
 import { useRef, useLayoutEffect } from "react";
 import { SakuraBloom } from "./sakuraBloom";
+import { useRouter } from "next/router";
 
 export function Welcome(): JSX.Element {
 	const [navIsVisible, toggleNavIsVisible] = useToggle(false);
 	const [count, setCount] = useState<number>(0);
+	const router = useRouter();
+
 	useEffect(() => {
 		if (count === 8) {
 			toggleNavIsVisible();
@@ -26,9 +29,13 @@ export function Welcome(): JSX.Element {
 		};
 	}, [count]);
 
+	if (count === 8) {
+		router.push("/gallery/special");
+	}
+
 	return (
 		<header className="relative w-full h-full flex flex-col justify-center items-center gap-8 py-6 z-0">
-			<SakuraBloom leafsCount={20} petalsCount={30}/>
+			<SakuraBloom leafsCount={20} petalsCount={30} />
 			<h1 className="text-xl md:text-5xl flex gap-3 items-baseline justify-center cursor-pointer select-none ">
 				<span className="font-semibold tracking-wider">Project</span>
 				<GlitchText

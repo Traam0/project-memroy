@@ -28,5 +28,5 @@ export async function createAccount(
 		engram_id: freshEngram._id,
 	});
 
-	res.status(StatusCodes.OK).json({ ...user._doc });
+	res.status(StatusCodes.CREATED).json({ ...user._doc });
 }

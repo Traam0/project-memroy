@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 interface SakuraBloomProps {
 	leafsCount: number;
@@ -11,7 +11,7 @@ export function SakuraBloom({
 }: SakuraBloomProps): JSX.Element {
 	const leafContainer = useRef<HTMLDivElement>(null);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		for (let i = 0; i < leafsCount; i++) {
 			const leaf = document.createElement("div");
 			leaf.classList.add("leaf");

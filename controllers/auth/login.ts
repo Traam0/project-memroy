@@ -9,7 +9,10 @@ import bcryptjs from "bcryptjs";
 import { attachCookies, signToken } from "~/utils";
 import { StatusCodes } from "http-status-codes";
 
-export async function loginAttempt(req: NextApiRequest, res: NextApiResponse) {
+export async function loginAttempt(
+	req: NextApiRequest,
+	res: NextApiResponse
+): Promise<void> {
 	const salt = await bcryptjs.genSalt(10);
 	const user = await User.findOne({ email: req.body.email });
 

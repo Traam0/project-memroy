@@ -2,6 +2,10 @@ import { Schema, model, models } from "mongoose";
 
 const GalleryScehma = new Schema(
 	{
+		engram_id: {
+			type: String,
+			required: true,
+		},
 		title: {
 			type: Schema.Types.String,
 			required: false,
@@ -12,7 +16,7 @@ const GalleryScehma = new Schema(
 		description: {
 			type: Schema.Types.String,
 			required: false,
-			default: true,
+			default: null,
 		},
 		image: {
 			type: Schema.Types.String,

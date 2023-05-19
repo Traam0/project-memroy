@@ -7,6 +7,7 @@ import {
 	QueryClientProvider,
 } from "@tanstack/react-query";
 import NextNProgress from "nextjs-progressbar";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export default function App({ Component, pageProps }: AppProps) {
 	const querryClient = useRef(new QueryClient());
@@ -16,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Hydrate state={pageProps.dehydratedState}>
 				<NextNProgress height={5} color="#E0AAFF" stopDelayMs={220} />
 				<Component {...pageProps} />
+				<ReactQueryDevtools initialIsOpen={false} />
 			</Hydrate>
 		</QueryClientProvider>
 	);

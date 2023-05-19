@@ -28,13 +28,16 @@ const UserSchema = new Schema(
 			unique: true,
 		},
 		password: {
-			type: String,
+			type: Schema.Types.String,
 			required: true,
 		},
 		engram_id: {
-			type: String,
+			type: Schema.Types.String,
 			required: true,
 			unique: true,
+		},
+		image: {
+			type: Schema.Types.String,
 		},
 	},
 	{ timestamps: true }

@@ -1,17 +1,22 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
-import { useToggle } from "~/hooks";
+import { useSession, useToggle } from "~/hooks";
 import {
 	IconHelpSquare,
 	IconHome2,
 	IconLayoutBottombar,
 	IconLayoutBottombarExpand,
+	IconLogin,
+	IconLogout2,
 	IconPhoto,
 	IconTable,
 	TablerIconsProps,
 } from "@tabler/icons-react";
-import Link from "next/link";
 import { Toaster } from "react-hot-toast";
+import { classNames } from "~/utils/classNames";
+import { useMemo } from "react";
+import Link from "next/link";
+import axios from "axios";
 
 interface AppLayoutProps {
 	children: React.ReactNode;
@@ -53,6 +58,14 @@ const navItemVariants = {
 
 export function AppLayout({ children }: AppLayoutProps): JSX.Element {
 	const [isOpen, toggleIsOpen] = useToggle(false);
+	const { data: session, ...sessionRest } = useSession();
+
+	const logout = useMemo(() => {
+		return function () {
+			axios.post("/api/auth/logout", null, { withCredentials: true });
+		};
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -61,7 +74,7 @@ export function AppLayout({ children }: AppLayoutProps): JSX.Element {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/logo.png" />
 			</Head>
-			<main className="h-screen w-screen scrollbar-none bg-dark text-white overflow-y-scroll relative">
+			<main className="h-screen w-screen scrollbar-none bg-dark text-light overflow-y-scroll relative">
 				{children}
 				<Toaster />
 
@@ -96,7 +109,31 @@ export function AppLayout({ children }: AppLayoutProps): JSX.Element {
 						<NavItem text="Guide" uri="/guide" icon={IconHelpSquare} />
 						<NavItem text="Gallery" uri="/gallery" icon={IconPhoto} />
 						<NavItem text="About me" uri="/me" icon={IconTable} />
+						{session ? (
+							<NavItem
+								text="Logout"
+								uri="/api/logout"
+								icon={IconLogout2}
+								className="text-red-600 font-medium "
+							/>
+						) : (
+							<NavItem
+								text="Login"
+								uri="/auth/login"
+								icon={IconLogin}
+								className="text-purpureus font-medium "
+							/>
+						)}
 					</motion.ul>
+
+					{/* <motion.div
+						initial={navWrapVariants.closed}
+						variants={navWrapVariants}
+						className="absolute left-0 bottom-0 bg-light bg-opacity-20 backdrop-blur-[8px] p-2 rounded-lg whitespace-nowrap text-red-600"
+						style={{ translateX: "-110%", translateY: "" }}
+					>
+						Logout
+					</motion.div> */}
 				</motion.div>
 			</main>
 		</>
@@ -107,12 +144,22 @@ interface NavItemProps {
 	text: string;
 	uri: string;
 	icon?: (props: TablerIconsProps) => JSX.Element;
+	className?: string;
+	handleCick?: () => void;
 }
 
-function NavItem({ text, icon: Icon, uri }: NavItemProps): JSX.Element {
+function NavItem({
+	text,
+	icon: Icon,
+	uri,
+	className,
+}: NavItemProps): JSX.Element {
 	return (
 		<motion.li
-			className="md:hover:bg-purpureus/40 p-2 rounded-md flex justify-start text-base items-center gap-2 "
+			className={classNames(
+				className ? className : "",
+				"md:hover:bg-purpureus/40 p-2 rounded-md flex justify-start text-current text-base items-center gap-2 "
+			)}
 			variants={navItemVariants}
 		>
 			<motion.span>{Icon && <Icon />}</motion.span>

@@ -2,6 +2,7 @@ import { Disclosure } from "@headlessui/react";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { AppLayout } from "~/Layouts/appLayout";
 import { GlitchText } from "~/components/ui";
 import { classNames } from "~/utils/classNames";
 
@@ -24,25 +25,8 @@ export default function Guide() {
 	}, []);
 
 	return (
-		<main className="h-screen w-screen scrollbar-none bg-[#131313] overflow-x-hidden text-light overflow-y-scroll  relative guide">
-			<div className="blob-overlayer fixed inset-0 blur-3xl ">
-				<div
-					id="blob"
-					className="blob h-[350px] aspect-square absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-violet-400  to-red-300 blob-spin opacity-80"
-				></div>
-			</div>
-
-			<header className="text-3xl w-full flex items-center justify-between px-2 md:px-12 py-8 relative before:content-[''] before:w-full before:absolute before:bg-gradient-to-r before:from-indigo-200 before:to-pink-300 before:inset-x-0 before:h-0.5 before:bottom-0">
-				<div onClick={() => router.push("/")}>
-					<GlitchText
-						text="<memory />"
-						className="hidden md:text-4xl md:block"
-					/>
-				</div>
-				<h1 className="bg-gradient-to-r from-purple-200 to-pink-600 text-transparent bg-clip-text font-medium text-4xl tracking-wider cursor-pointer hover:animate-pulse">
-					Guide.
-				</h1>
-			</header>
+		<AppLayout /* className="h-screen w-screen scrollbar-none bg-[#131313] overflow-x-hidden text-light overflow-y-scroll  relative guide" */
+		>
 			<div className="mt-16 md:px-12 w-screen space-y-5 relative ">
 				<div>
 					<Disclosure defaultOpen>
@@ -70,6 +54,7 @@ export default function Guide() {
 									forgetfulness, this project serves as a dedicated platform
 									where a tapestry of memories can be woven.
 									<br />
+									<br />
 									It is an intimate space where I can gather and showcase all
 									the wonderful experiences and significant events, both shared
 									with and without that person. Through a scrollable feed of
@@ -78,6 +63,7 @@ export default function Guide() {
 									painting a vivid picture of the joy, love, and connections
 									that have shaped our journey.
 									<br />
+									<br />
 									But Project Memory is more than just a collection of memories.
 									It is a testament to the enduring power of shared experiences.
 									It invites others, too, to participate in this beautiful
@@ -85,6 +71,7 @@ export default function Guide() {
 									sanctuary where individuals can document and preserve their
 									own fading memories, creating a collective tapestry of the
 									past that might otherwise be lost to time.
+									<br />
 									<br />
 									Within the project, memories find solace in an ethereal
 									existence, transcending the bounds of time. While memories may
@@ -100,6 +87,7 @@ export default function Guide() {
 									as a portal to the past, invoking nostalgia and inviting us to
 									relive the joy, laughter, and profound emotions that reside
 									within each memory fragment.
+									<br />
 									<br />
 									In this digital sanctuary, memories are cherished and given
 									the attention they deserve. They are safeguarded from the
@@ -188,6 +176,6 @@ export default function Guide() {
 					</Disclosure>
 				</div>
 			</div>
-		</main>
+		</AppLayout>
 	);
 }
