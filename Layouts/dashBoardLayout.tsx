@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { classNames } from "~/utils/classNames";
+import { User } from "~/utils/types";
 
 interface DashBoardLayoutProps {
 	children: React.ReactNode;
@@ -49,7 +50,7 @@ export function DashBoardLayout({
 					<aside className="h-full min-w-fit bg-[#242323] px-4 py-14 text-center">
 						<section
 							role="contentinfo"
-							className="flex flex-col w-full h-fit py-2 justify-center items-center gap-1.5"
+							className="flex flex-col w-full h-fit py-2 justify-center items-start gap-1.5"
 						>
 							<Image
 								src={
@@ -74,9 +75,8 @@ export function DashBoardLayout({
 						</section>
 					</aside>
 				)}
-				{children}
+				<div className="overflow-y-scroll scrollbar-none">{children}</div>
 			</div>
 		</AppLayout>
 	);
 }
-
