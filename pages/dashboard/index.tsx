@@ -62,7 +62,7 @@ export default function DashBoard(): JSX.Element {
 							<div className="py-2 flex flex-col cursor-pointer">
 								<div className="flex gap-3">
 									<h2 className="flex items-center gap-1">EngramID: </h2>{" "}
-									{dashboard?.engram._id}
+									{dashboard?.engram?._id}
 								</div>
 								<div className="flex gap-3">
 									<h2 className="flex items-center gap-1">Initialised : </h2>{" "}
