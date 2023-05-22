@@ -26,7 +26,7 @@ const headingClasses: Record<1 | 2 | 3, string> = {
 };
 
 interface TipTapProps {
-	callback?: Function;
+	callback?: (html: string) => void;
 }
 
 export function TipTapEditor({ callback }: TipTapProps): JSX.Element {
@@ -301,7 +301,14 @@ export function TipTapEditor({ callback }: TipTapProps): JSX.Element {
 					<motion.button
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						onClick={() => callback && callback(editor?.getHTML())}
+						onClick={() => {
+							if (!callback) alert("oops");
+							else {
+								const html = editor.getHTML();
+								alert('yay')
+								callback(html);
+							}
+						}}
 						className="bg-vaporwave-green-500 text-vaporwave-pink-500 items-center flex gap-1 py-2 px-3 rounded-md"
 					>
 						<IconSend size={18} />{" "}

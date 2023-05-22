@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { useSession, useToggle } from "~/hooks";
 import { useRouter } from "next/router";
+import { User } from "~/utils/types";
 
 export default function Login(): JSX.Element {
 	const router = useRouter();

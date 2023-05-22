@@ -34,6 +34,7 @@ export default function DashBoard(): JSX.Element {
 	);
 
 	const [newFragment, setNewFragment] = useState<string>();
+
 	return (
 		<DashBoardLayout>
 			<div className="w-full h-full py-10 px-6 pb-44">
@@ -152,7 +153,10 @@ export default function DashBoard(): JSX.Element {
 				</Section>
 
 				<Section title="Fragment">
-					<TipTapEditor callback={(html: string) => console.log(html)} />
+					<TipTapEditor callback={(html: string) => setNewFragment(html)} />
+				</Section>
+				<Section title="etst">
+					<div dangerouslySetInnerHTML={{__html: newFragment as string}}></div>
 				</Section>
 			</div>
 		</DashBoardLayout>
