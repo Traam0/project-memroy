@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { SessionObject } from "~/utils/types";
 
 export function useSession() {
 	return useQuery(["session"], getSession, {
