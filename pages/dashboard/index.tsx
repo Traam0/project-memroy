@@ -12,6 +12,7 @@ import { format, parseISO } from "date-fns";
 import React, { useState } from "react";
 import { DashBoardLayout } from "~/Layouts/dashBoardLayout";
 import { Pill } from "~/components/ui";
+import { TipTapEditor } from "~/components/ui/editors/tip-tap";
 import { useSession } from "~/hooks";
 import { classNames } from "~/utils/classNames";
 import { pad } from "~/utils/helpers";
@@ -34,7 +35,7 @@ export default function DashBoard(): JSX.Element {
 
 	return (
 		<DashBoardLayout>
-			<div className="w-full h-full py-10 px-6 ">
+			<div className="w-full h-full py-10 px-6 pb-44">
 				<section
 					role="banner"
 					className="font-mono tracking-wide px-5 py-3  bg-[#242323] rounded-md shadow-purpureus shadow-sm text-lg"
@@ -49,16 +50,13 @@ export default function DashBoard(): JSX.Element {
 
 				<Section title="Account Overview">
 					<div className="bg-vaporwave-purple-900/60 p-3 rounded-lg flex flex-wrap gap-8 justify-start ">
-						{/* First Card */}
 						<div className="bg-dark flex flex-col gap-1 justify-start items-start w-fit py-3 px-4 rounded-md min-w-[320px]">
-							{/* name & icon */}
 							<div className="flex flex-col items-center">
 								<IconDatabase
 									size={40}
 									className="text-vaporwave-pink-500 fill-vaporwave-pink-700/40"
 								/>
 							</div>
-							{/* content */}
 							<div className="py-2 flex flex-col cursor-pointer">
 								<div className="flex gap-3">
 									<h2 className="flex items-center gap-1">EngramID: </h2>{" "}
@@ -96,7 +94,7 @@ export default function DashBoard(): JSX.Element {
 								<div>{dashboard?.engram.description}</div>
 							</div>
 						</div>
-
+						<span></span>
 						<div className="bg-dark flex flex-col gap-1 justify-start items-start w-fit py-3 px-4 rounded-md w-[320px]">
 							<div className="flex flex-col items-center">
 								<IconPhoto
@@ -150,6 +148,10 @@ export default function DashBoard(): JSX.Element {
 							</div>
 						</div>
 					</div>
+				</Section>
+
+				<Section title="Fragment">
+					<TipTapEditor callback={(html: string)=>console.log(html)}/>
 				</Section>
 			</div>
 		</DashBoardLayout>
