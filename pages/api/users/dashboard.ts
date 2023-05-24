@@ -2,12 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
 import { getDashBoard } from "~/controllers/users";
 import { authenticateUser } from "~/middlewares/authMiddleware";
+import { log } from "~/middlewares/log";
 import { connDB } from "~/utils";
 // import cors from 'cors'
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
-router.use(connDB).use(authenticateUser).get(getDashBoard);
+router.use(connDB).use(authenticateUser).use(log).get(getDashBoard);
 
 export default router.handler({
 	onError: (err: any, req: NextApiRequest, res: NextApiResponse) => {

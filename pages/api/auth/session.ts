@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
 import { loginAttempt } from "~/controllers/auth";
 import { authenticateUser } from "~/middlewares/authMiddleware";
+import { log } from "~/middlewares/log";
 import { connDB } from "~/utils";
 // import cors from 'cors'
 
@@ -10,6 +11,7 @@ const router = createRouter<NextApiRequest, NextApiResponse>();
 router
 	.use(connDB)
 	.use(authenticateUser)
+	.use(log)
 	.get((req:any, res) => {
 		res.status(200).json({...req.user});
 	});

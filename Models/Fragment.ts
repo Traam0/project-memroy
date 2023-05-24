@@ -15,11 +15,11 @@ const FragmentSchema = new Schema(
 			type: String,
 			required: false,
 		},
-		image: {
-			type: String,
-			trim: true,
-			required: false,
-		},
+		// image: {
+		// 	type: String,
+		// 	trim: true,
+		// 	required: false,
+		// },
 		strength: {
 			type: Number,
 			required: false,

@@ -1,22 +1,28 @@
+import axios, { Axios, AxiosError } from "axios";
+import { useState } from "react";
+import { StatusCodes } from "http-status-codes";
+import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import { format, parseISO } from "date-fns";
+import { toast } from "react-hot-toast";
+import { pad } from "~/utils/helpers";
+import { useSession, useToggle } from "~/hooks";
+import { convertToBase64 } from "~/utils";
+import { classNames } from "~/utils/classNames";
+import { DashBoard, Exhibit } from "~/utils/types";
+import { Pill } from "~/components/ui";
+import { DashBoardLayout } from "~/Layouts/dashBoardLayout";
+import { TipTapEditor } from "~/components/ui/editors/tip-tap";
 import {
+	IconClearAll,
 	IconDatabase,
-	IconKey,
 	IconLock,
 	IconLockOpen,
 	IconPhoto,
+	IconX,
 } from "@tabler/icons-react";
-import { useQuery } from "@tanstack/react-query";
-import axios, { Axios, AxiosError } from "axios";
-import { error } from "console";
-import { format, parseISO } from "date-fns";
-import React, { useState } from "react";
-import { DashBoardLayout } from "~/Layouts/dashBoardLayout";
-import { Pill } from "~/components/ui";
-import { TipTapEditor } from "~/components/ui/editors/tip-tap";
-import { useSession } from "~/hooks";
-import { classNames } from "~/utils/classNames";
-import { pad } from "~/utils/helpers";
-import { DashBoard } from "~/utils/types";
+import { FileUploader } from "react-drag-drop-files";
+import { SelectWithSearch } from "~/components/ui/forms";
 
 export default function DashBoard(): JSX.Element {
 	const { data: session, ...sessionRest } = useSession();
@@ -34,6 +40,34 @@ export default function DashBoard(): JSX.Element {
 	);
 
 	const [newFragment, setNewFragment] = useState<string>();
+	const [file, setFile] = useState<File>();
+	const [fileUploading, toggleFileUploading] = useToggle(false);
+
+	async function uploadExhibit(file: File): Promise<void> {
+		toggleFileUploading();
+		const encoded = await convertToBase64(file);
+		axios
+			.post<Exhibit>(
+				"/api/gallery/addExhibit",
+				{ imageEncoded: encoded },
+				{ withCredentials: true }
+			)
+			.then(({ status, data: res }) => {
+				toast.success("Item Added to gallery with success");
+			})
+			.catch((error: AxiosError<{ message: string }>) => {
+				switch (error.response?.status) {
+					case StatusCodes.UNAUTHORIZED:
+						toast.error(error.response.data.message);
+					case StatusCodes.BAD_SESSION:
+						toast.error(error.response.data.message);
+						sessionRest.refetch();
+					default:
+						return toast.error("Oops Something Went Wrong :(");
+				}
+			})
+			.finally(toggleFileUploading);
+	}
 
 	return (
 		<DashBoardLayout>
@@ -59,7 +93,7 @@ export default function DashBoard(): JSX.Element {
 									className="text-vaporwave-pink-500 fill-vaporwave-pink-700/40"
 								/>
 							</div>
-							<div className="py-2 flex flex-col cursor-pointer">
+							<div className="py-2 flex flex-col gap-1 cursor-pointer">
 								<div className="flex gap-3">
 									<h2 className="flex items-center gap-1">EngramID: </h2>{" "}
 									{dashboard?.engram?._id}
@@ -87,13 +121,16 @@ export default function DashBoard(): JSX.Element {
 									</h2>{" "}
 									{dashboard?.engram.public ? "public" : "private"}
 								</div>
-								<div className="flex gap-3">
+								{/* <div className="flex gap-3">
 									<h2 className="flex items-center gap-1">
 										<IconKey /> Key:{" "}
 									</h2>{" "}
 									•••••••••• <span className="cursor-pointer">copy</span>
+								</div> */}
+								<div>
+									<h3>description:</h3>
+									<p className="pl-2">{dashboard?.engram.description}</p>
 								</div>
-								<div>{dashboard?.engram.description}</div>
 							</div>
 						</div>
 						<span></span>
@@ -107,7 +144,7 @@ export default function DashBoard(): JSX.Element {
 
 							<div className="py-2 flex flex-col gap-2 select-none h-full w-full ">
 								{dashboard && dashboard?.gallery.images.length > 0 ? (
-									<React.Fragment>
+									<>
 										<div className="flex gap-3">
 											<h2 className="flex items-center gap-1">
 												Exhibits count :{" "}
@@ -122,8 +159,8 @@ export default function DashBoard(): JSX.Element {
 												{pad(dashboard.gallery.tags.length)}
 											</div>
 											<div className="overflow-x-scroll scrollbar-none flex gap-2 items-center justify-start whitespace-nowrap">
-												{dashboard.gallery.tags.map((category) => (
-													<Pill label={category} size="base" />
+												{dashboard.gallery.tags.map((tag) => (
+													<Pill label={tag} size="base" />
 												))}
 											</div>
 										</div>
@@ -141,7 +178,7 @@ export default function DashBoard(): JSX.Element {
 											</div>
 										</div>
 										<div className="flex overflow-x-scroll scrollbar-none"></div>
-									</React.Fragment>
+									</>
 								) : (
 									<div className="h-full w-full flex items-center justify-center text-xl ">
 										Empty
@@ -153,10 +190,73 @@ export default function DashBoard(): JSX.Element {
 				</Section>
 
 				<Section title="Fragment">
+					<p>
+						Fragments are the building blocks of memories within Project Memory.
+						They encapsulate the essence of a moment, preserving it for
+						eternity. Now, it's your turn to create your own fragment. Share a
+						cherished memory, a heartfelt experience, or a joyful event that
+						holds a special place in your heart. Add dates, images, and a
+						personal touch to bring your fragment to life. Let your memories
+						shine and be a source of inspiration for others. <br /> Start
+						crafting your unique fragment now and let the magic of reminiscence
+						unfold.
+					</p>
+					<h2>TBC</h2>
 					<TipTapEditor callback={(html: string) => setNewFragment(html)} />
 				</Section>
-				<Section title="etst">
-					<div dangerouslySetInnerHTML={{__html: newFragment as string}}></div>
+
+				<Section title="test">
+					<div
+						dangerouslySetInnerHTML={{ __html: newFragment as string }}
+					></div>
+				</Section>
+
+				<Section title="Gallery">
+					<div
+						className="bg-vaporwave-pink-900/60 p-3 rounded-lg flex  gap-8 justify-start"
+						id="gal"
+					>
+						<form className="w-[400px]">
+							<FileUploader
+								handleChange={(file: File) => setFile(file)}
+								name="file"
+								types={["JPG", "PNG", "GIF"]}
+							/>
+							<div>
+								<SelectWithSearch
+									label="Category"
+									onChange={() => {}}
+									selected=""
+									value=""
+									options={[...(dashboard?.gallery.categories ?? [])]}
+								/>
+							</div>
+							<div>tags</div>
+							<motion.button
+								type="reset"
+								className="flex items-center upper text-lg bg-vaporwave-yellow-500 rounded-md px-3 py-1 text-vaporwave-blue-500"
+								onClick={() => console.log(file)}
+							>
+								<IconClearAll />
+								clear
+							</motion.button>
+						</form>
+
+						{/* <div className="relative w-full max-h-[600px]">
+							{file && (
+								<IconX
+									onClick={() => setFile(undefined)}
+									className="absolute top-2 right-2 bg-vaporwave-pink-500/90 text-vaporwave-purple-600 rounded-sm cursor-pointer"
+								/>
+							)}
+							<img
+								src={file && URL.createObjectURL(file)}
+								alt={file?.name ?? 'no image selected'}
+								height={400}
+								className="w-full h-full object-cover"
+							/>
+						</div> */}
+					</div>
 				</Section>
 			</div>
 		</DashBoardLayout>

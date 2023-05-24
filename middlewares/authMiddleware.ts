@@ -1,6 +1,6 @@
 /** @format */
 
-import { UnAuthenticatedError, UnAuthorizedError } from "~/errors";
+import { BadSessionError, UnAuthenticatedError, UnAuthorizedError } from "~/errors";
 import { NextApiResponse } from "next";
 import jswt from "jsonwebtoken";
 import { Session } from "~/Models";
@@ -71,7 +71,7 @@ export async function authenticateUser(
 						RTS: payload.RTS,
 					});
 
-					throw UnAuthenticatedError(res, "Session Expired");
+					throw BadSessionError(res, "Session Expired");
 				}
 			);
 		}

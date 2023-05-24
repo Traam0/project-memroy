@@ -2,12 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
 import { addExhibit } from "~/controllers/gallery";
 import { authenticateUser } from "~/middlewares/authMiddleware";
+import { log } from "~/middlewares/log";
 import { connDB } from "~/utils";
 // import cors from 'cors'
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
-router.use(connDB).use(authenticateUser).post(addExhibit);
+router.use(connDB).use(authenticateUser).use(log).post(addExhibit);
 
 export default router.handler({
 	onError: (err: any, req: NextApiRequest, res: NextApiResponse) => {
@@ -22,7 +23,7 @@ export default router.handler({
 export const config = {
 	api: {
 		bodyParser: {
-			sizeLimit: "50mb",
+			sizeLimit: "20mb",
 		},
 	},
 };

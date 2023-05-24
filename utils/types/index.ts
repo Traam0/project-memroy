@@ -40,6 +40,7 @@ declare interface Exhibit {
 	description?: string;
 	category: string;
 	tags: string[];
+	image: string;
 	createdAt: string;
 	updatedAt: string;
 	__v: number;

@@ -8,6 +8,7 @@ import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { classNames } from "~/utils/classNames";
 import { User } from "~/utils/types";
+import Link from "next/link";
 
 interface DashBoardLayoutProps {
 	children: React.ReactNode;
@@ -72,6 +73,7 @@ export function DashBoardLayout({
 									{format(parseISO(user?.createdAt as string), "dd-MMMM-yyy")}
 								</div>
 							</div>
+							<Link href={'#gal'}>gallery</Link>
 						</section>
 					</aside>
 				)}

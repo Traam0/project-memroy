@@ -23,9 +23,5 @@ export async function addExhibit(req: any, res: NextApiResponse) {
 			image: uploadResponse.url,
 		});
 
-		console.log("sssssssssssssss");
-
-		res.status(StatusCodes.CREATED).json({ ...exhibit });
-	
-	
+		res.status(StatusCodes.CREATED).json({ ...exhibit });	
 }

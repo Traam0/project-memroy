@@ -51,7 +51,7 @@ export default function Special(): JSX.Element {
 
 	return (
 		<AppLayout>
-			<div ref={gallery} className="w-[150vmax] h-[150vmax] absolute bg-dark ">
+			<div ref={gallery} className="w-[200vmax] h-[150vmax] absolute bg-dark ">
 				<SakuraBloom leafsCount={50} petalsCount={75} />
 				<Block
 					imageURI="https://res.cloudinary.com/dqmh0oemg/image/upload/v1684527836/project-memory/specials/IMG_20230218_110859_dxvnnx.jpg"

@@ -1,3 +1,5 @@
-import { loginAttempt } from "./login";
+import { loginAttempt} from "./login";
+import { logout } from "./logout";
 
-export {loginAttempt}
+
+export {loginAttempt, logout}
