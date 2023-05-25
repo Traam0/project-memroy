@@ -59,8 +59,6 @@ export default function DashBoard(): JSX.Element {
 				switch (error.response?.status) {
 					case StatusCodes.UNAUTHORIZED:
 						toast.error(error.response.data.message);
-					case StatusCodes.BAD_SESSION:
-						toast.error(error.response.data.message);
 						sessionRest.refetch();
 					default:
 						return toast.error("Oops Something Went Wrong :(");

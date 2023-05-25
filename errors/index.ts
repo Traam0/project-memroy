@@ -6,7 +6,6 @@ import UnAuthorizedError from "./UnauthorizedError";
 import ConflictError from "./ConflictError";
 import NotFoundError from "./NotFound";
 import InternalServerError from "./InternalServerError";
-import BadSessionError from "./BadSessionError";
 
 export {
 	UnAuthenticatedError,
@@ -15,6 +14,5 @@ export {
 	NotFoundError,
 	ConflictError,
 	InternalServerError,
-	BadSessionError,
 };
 // export default { UnAuthenticatedError, BadRequestError, UnAuthorizedError, NotFoundError };

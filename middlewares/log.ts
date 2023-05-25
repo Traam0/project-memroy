@@ -11,7 +11,7 @@ export async function log(
 		req.user.id
 	}, ${req.user.email} requested ${req.url}. \n`;
 
-	fs.appendFile("./middlewareLogs.log", log, (error) => {
+	fs.appendFile(".log", log, (error) => {
 		if (error) {
 			console.log(error);
 		}
